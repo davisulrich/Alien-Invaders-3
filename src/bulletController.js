@@ -4,12 +4,12 @@ export default class BulletController {
   bullets = [];
   timeTillNextBullet = 0;
 
-  constructor(canvas, maxBulletsAtATime, bulletColor, bulletType, level) {
+  constructor(canvas, bulletColor, bulletType, level, shipNum) {
     this.canvas = canvas;
-    this.maxBulletsAtATime = maxBulletsAtATime;
     this.bulletColor = bulletColor;
     this.bulletType = bulletType;
     this.level = level;
+    this.shipNum = shipNum;
 
     this.shootSound = new Audio("/src/audio/" + bulletType + "_laser.ogg");
     if (this.bulletType === "player") this.shootSound.volume = 0.1;
@@ -21,12 +21,36 @@ export default class BulletController {
   }
 
   shoot(x, y, velocity, timeTillNextBullet = 7) {
-    if (
-      this.timeTillNextBullet <= 0
-      // && this.bullets.length < this.maxBulletsAtATime
-    ) {
-      const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletColor);
-      this.bullets.push(bullet);
+    if (this.timeTillNextBullet <= 0) {
+      // console.log(this.shipNum);
+      // double shooter
+      if (this.shipNum === 3 && this.bulletType === "player") {
+        const bullet1 = new Bullet(
+          this.canvas,
+          x - 20,
+          y,
+          velocity,
+          this.bulletColor
+        );
+        const bullet2 = new Bullet(
+          this.canvas,
+          x + 16,
+          y,
+          velocity,
+          this.bulletColor
+        );
+        this.bullets.push(bullet1, bullet2);
+      } else {
+        const bullet = new Bullet(
+          this.canvas,
+          x - 2,
+          y,
+          velocity,
+          this.bulletColor
+        );
+        this.bullets.push(bullet);
+      }
+
       this.timeTillNextBullet = timeTillNextBullet;
       this.shootSound.currentTime = 0;
       this.shootSound.play();

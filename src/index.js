@@ -13,10 +13,17 @@
 // BOOM - add a function to reset all variables in the case of gameover
 // BOOM - on the game over screen, allow hitting space bar to start over
 // BOOM - when you win then start over, set didWIn back to false
-// - give the player the choice of ship
+// BOOM - give the player the choice of ship
+// BOOM - make bullets above halfway up the screen disappear when you reach new level
 // - alter shooting speed basedoff the ship chosen
-// - make bullets above halfway up the screen disappear when you reach new level
-// - add text on the screen to indicate level up (LEVEL 3 - YOUR END)
+// - add text on the screen to indicate level up (LEVEL 3)
+// - decide on a rule for double shooting, implement it
+// - add music to the background
+// - design new ships
+
+// Debatable decisions I made:
+// - when hit new level, everything resets, including ship position
+// - only one life
 
 import EnemyController from "/src/enemyController.js";
 import Player from "/src/player.js";
@@ -74,6 +81,19 @@ let startGame = (event) => {
       }
       if (event.code === "Digit3") {
         shipNum = 3;
+        playerBulletController = new BulletController(
+          canvas,
+          "#9df716",
+          "player",
+          current_level,
+          shipNum
+        );
+        enemyController = new EnemyController(
+          canvas,
+          enemyBulletController,
+          playerBulletController,
+          current_level
+        );
         player = new Player(canvas, 18, playerBulletController, shipNum);
       }
       // if you lost, reset everything
@@ -91,17 +111,17 @@ document.addEventListener("keydown", startGame);
 // important variables
 let playerBulletController = new BulletController(
   canvas,
-  15,
   "#9df716",
   "player",
-  current_level
+  current_level,
+  shipNum
 );
 let enemyBulletController = new BulletController(
   canvas,
-  4,
   "red",
   "enemy",
-  current_level
+  current_level,
+  shipNum
 );
 
 let enemyController = new EnemyController(
@@ -138,19 +158,43 @@ function resetAllVariables() {
 
   playerBulletController = new BulletController(
     canvas,
-    15,
     "#9df716",
     "player",
-    current_level
+    current_level,
+    shipNum
   );
   enemyBulletController = new BulletController(
     canvas,
-    4,
     "red",
     "enemy",
-    current_level
+    current_level,
+    shipNum
   );
 
+  enemyController = new EnemyController(
+    canvas,
+    enemyBulletController,
+    playerBulletController,
+    current_level
+  );
+  player = new Player(canvas, 18, playerBulletController, shipNum);
+}
+
+function levelUp() {
+  playerBulletController = new BulletController(
+    canvas,
+    "#9df716",
+    "player",
+    current_level,
+    shipNum
+  );
+  enemyBulletController = new BulletController(
+    canvas,
+    "red",
+    "enemy",
+    current_level,
+    shipNum
+  );
   enemyController = new EnemyController(
     canvas,
     enemyBulletController,
@@ -217,22 +261,12 @@ function checkGameOver() {
     if (current_level === 1) {
       current_level = 2;
       levelUpSound.play();
-      enemyController = new EnemyController(
-        canvas,
-        enemyBulletController,
-        playerBulletController,
-        current_level
-      );
+      levelUp();
       return;
     } else if (current_level === 2) {
       current_level = 3;
       levelUpSound.play();
-      enemyController = new EnemyController(
-        canvas,
-        enemyBulletController,
-        playerBulletController,
-        current_level
-      );
+      levelUp();
       return;
     } else if (current_level === 3) {
       didWin = true;
