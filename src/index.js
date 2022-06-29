@@ -15,6 +15,7 @@
 // BOOM - when you win then start over, set didWIn back to false
 // BOOM - give the player the choice of ship
 // BOOM - make bullets above halfway up the screen disappear when you reach new level
+// BOOM - add a new gameover state when any enemy hits the bottom of the screen
 // - alter shooting speed basedoff the ship chosen
 // - add text on the screen to indicate level up (LEVEL 3)
 // - decide on a rule for double shooting, implement it
@@ -66,6 +67,17 @@ playerWinSound.volume = 0.25;
 const playerDeathSound = new Audio("/src/audio/fast-game-over.wav");
 playerDeathSound.volume = 0.15;
 
+const gasolina = new Audio("src/audio/Gasolina.mp3");
+gasolina.volume = 0.5;
+
+let levelUpTextTimer = 40;
+const level1Image = new Image();
+level1Image.src = "/src/images/level_1.png";
+const level2Image = new Image();
+level2Image.src = "/src/images/level_2.png";
+const level3Image = new Image();
+level3Image.src = "/src/images/level_3.png";
+
 // event listener arrow function
 let startGame = (event) => {
   if (
@@ -102,6 +114,7 @@ let startGame = (event) => {
       }
       gameState = GAME_STATE.RUNNING;
       gameStartAudio.play();
+      gasolina.play();
     }
   }
 };
@@ -145,6 +158,17 @@ function game() {
     if (!isGameOver) {
       enemyController.draw(ctx);
       player.draw(ctx);
+      // shows the Current Level Image, allows bullets to pass over
+      if (levelUpTextTimer >= 0) {
+        if (current_level === 1) {
+          ctx.drawImage(level1Image, 200, 300, 186, 48);
+        } else if (current_level === 2) {
+          ctx.drawImage(level2Image, 200, 300, 186, 48);
+        } else if (current_level === 3) {
+          ctx.drawImage(level3Image, 200, 300, 186, 48);
+        }
+        levelUpTextTimer--;
+      }
       playerBulletController.draw(ctx);
       enemyBulletController.draw(ctx);
     }
@@ -155,6 +179,7 @@ function resetAllVariables() {
   current_level = 1;
   isGameOver = false;
   didWin = false;
+  levelUpTextTimer = 40;
 
   playerBulletController = new BulletController(
     canvas,
@@ -181,6 +206,8 @@ function resetAllVariables() {
 }
 
 function levelUp() {
+  levelUpTextTimer = 40;
+
   playerBulletController = new BulletController(
     canvas,
     "#9df716",
@@ -202,6 +229,8 @@ function levelUp() {
     current_level
   );
   player = new Player(canvas, 18, playerBulletController, shipNum);
+
+  levelUpSound.play();
 }
 
 function showStartScreen(ctx) {
@@ -257,15 +286,21 @@ function checkGameOver() {
     isGameOver = true;
     playerDeathSound.play();
   }
+  if (enemyController.enemyRows.length > 0) {
+    const bottomMostEnemy =
+      enemyController.enemyRows[enemyController.enemyRows.length - 1][0];
+    if (bottomMostEnemy.y + bottomMostEnemy.height >= canvas.height) {
+      isGameOver = true;
+      playerDeathSound.play();
+    }
+  }
   if (enemyController.enemyRows.length === 0) {
     if (current_level === 1) {
       current_level = 2;
-      levelUpSound.play();
       levelUp();
       return;
     } else if (current_level === 2) {
       current_level = 3;
-      levelUpSound.play();
       levelUp();
       return;
     } else if (current_level === 3) {
