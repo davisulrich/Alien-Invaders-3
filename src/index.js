@@ -16,10 +16,10 @@
 // BOOM - give the player the choice of ship
 // BOOM - make bullets above halfway up the screen disappear when you reach new level
 // BOOM - add a new gameover state when any enemy hits the bottom of the screen
+// BOOM - add text on the screen to indicate level up (LEVEL 3)
+// BOOM - add music to the background
 // - alter shooting speed basedoff the ship chosen
-// - add text on the screen to indicate level up (LEVEL 3)
 // - decide on a rule for double shooting, implement it
-// - add music to the background
 // - design new ships
 
 // Debatable decisions I made:
@@ -68,7 +68,13 @@ const playerDeathSound = new Audio("/src/audio/fast-game-over.wav");
 playerDeathSound.volume = 0.15;
 
 const gasolina = new Audio("src/audio/Gasolina.mp3");
-gasolina.volume = 0.5;
+gasolina.volume = 0.45;
+const vocalFunction = new Audio("src/audio/VocalFunction.mp3");
+vocalFunction.volume = 0.45;
+const inDaClub = new Audio("src/audio/InDaClub.mp3");
+inDaClub.volume = 0.45;
+const atMeh = new Audio("src/audio/atMeh.mp3");
+atMeh.volume = 0.45;
 
 let levelUpTextTimer = 40;
 const level1Image = new Image();
@@ -114,6 +120,8 @@ let startGame = (event) => {
       }
       gameState = GAME_STATE.RUNNING;
       gameStartAudio.play();
+      gasolina.currentTime = 0;
+      inDaClub.pause();
       gasolina.play();
     }
   }
@@ -284,6 +292,9 @@ function checkGameOver() {
     enemyController.collideWith(player)
   ) {
     isGameOver = true;
+    gasolina.pause();
+    vocalFunction.pause();
+    inDaClub.pause();
     playerDeathSound.play();
   }
   if (enemyController.enemyRows.length > 0) {
@@ -297,10 +308,14 @@ function checkGameOver() {
   if (enemyController.enemyRows.length === 0) {
     if (current_level === 1) {
       current_level = 2;
+      gasolina.pause();
+      vocalFunction.play();
       levelUp();
       return;
     } else if (current_level === 2) {
       current_level = 3;
+      vocalFunction.pause();
+      inDaClub.play();
       levelUp();
       return;
     } else if (current_level === 3) {
