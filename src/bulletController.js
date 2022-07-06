@@ -18,11 +18,13 @@ export default class BulletController {
     if (this.level === 3 && this.bulletType === "player") {
       this.bulletColor = "#6eddff";
     }
+    if (this.shipNum === 4 && this.bulletType === "player") {
+      this.bulletColor = "#e75eff";
+    }
   }
 
   shoot(x, y, velocity, timeTillNextBullet = 7) {
     if (this.timeTillNextBullet <= 0) {
-      // console.log(this.shipNum);
       // double shooter
       if (this.shipNum === 3 && this.bulletType === "player") {
         const bullet1 = new Bullet(
@@ -40,6 +42,15 @@ export default class BulletController {
           this.bulletColor
         );
         this.bullets.push(bullet1, bullet2);
+      } else if (this.shipNum === 4 && this.bulletType === "player") {
+        const bullet1 = new Bullet(
+          this.canvas,
+          x - 18,
+          y,
+          velocity,
+          this.bulletColor
+        );
+        this.bullets.push(bullet1);
       } else {
         const bullet = new Bullet(
           this.canvas,

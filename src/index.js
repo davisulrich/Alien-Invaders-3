@@ -18,9 +18,15 @@
 // BOOM - add a new gameover state when any enemy hits the bottom of the screen
 // BOOM - add text on the screen to indicate level up (LEVEL 3)
 // BOOM - add music to the background
-// - alter shooting speed basedoff the ship chosen
-// - decide on a rule for double shooting, implement it
+// - make a github pages website
+// - make 7 a unicorn shooter
+// - make a scoreboard
+// - add philosophy quotes to the page https://www.forbes.com/sites/ekaterinawalter/2013/12/30/30-powerful-quotes-on-failure/?sh=12d557c224bd
+// - add an instructions page
+// - decide on a rule for double shooting, implement it:
+//    - wait to shoot any enemies until they are at height 550?
 // - design new ships
+// - make it an actual website
 
 // Debatable decisions I made:
 // - when hit new level, everything resets, including ship position
@@ -57,6 +63,8 @@ const ship2 = new Image();
 ship2.src = "/src/images/pixel_ship_2.png";
 const ship3 = new Image();
 ship3.src = "/src/images/pixel_ship_3.png";
+const ship4 = new Image();
+ship4.src = "/src/images/pixel_ship_4.png";
 
 const gameStartAudio = new Audio("src/audio/computerNoise_000.ogg");
 gameStartAudio.volume = 0.022;
@@ -73,8 +81,14 @@ const vocalFunction = new Audio("src/audio/VocalFunction.mp3");
 vocalFunction.volume = 0.45;
 const inDaClub = new Audio("src/audio/InDaClub.mp3");
 inDaClub.volume = 0.45;
-const atMeh = new Audio("src/audio/atMeh.mp3");
-atMeh.volume = 0.45;
+const runIt = new Audio("src/audio/runIt.mp3");
+runIt.volume = 0.45;
+const byeByeBye = new Audio("src/audio/byeByeBye.mp3");
+byeByeBye.volume = 0.45;
+const pony = new Audio("src/audio/pony.mp3");
+pony.volume = 0.45;
+const oldTownRoad = new Audio("src/audio/oldTownRoad.mp3");
+oldTownRoad.volume = 0.45;
 
 let levelUpTextTimer = 40;
 const level1Image = new Image();
@@ -90,7 +104,8 @@ let startGame = (event) => {
     event.code === "Space" ||
     event.code === "Digit1" ||
     event.code === "Digit2" ||
-    event.code === "Digit3"
+    event.code === "Digit3" ||
+    event.code === "Digit7"
   ) {
     if (gameState === GAME_STATE.STARTSCREEN || isGameOver) {
       if (event.code === "Digit2") {
@@ -114,15 +129,38 @@ let startGame = (event) => {
         );
         player = new Player(canvas, 18, playerBulletController, shipNum);
       }
+      if (event.code === "Digit7") {
+        shipNum = 4;
+        playerBulletController = new BulletController(
+          canvas,
+          "#9df716",
+          "player",
+          current_level,
+          shipNum
+        );
+        enemyController = new EnemyController(
+          canvas,
+          enemyBulletController,
+          playerBulletController,
+          current_level
+        );
+        player = new Player(canvas, 18, playerBulletController, shipNum);
+      }
       // if you lost, reset everything
       if (isGameOver) {
         resetAllVariables();
       }
       gameState = GAME_STATE.RUNNING;
       gameStartAudio.play();
-      gasolina.currentTime = 0;
-      inDaClub.pause();
-      gasolina.play();
+      if (shipNum === 4) {
+        oldTownRoad.currentTime = 0;
+        byeByeBye.pause();
+        oldTownRoad.play();
+      } else {
+        gasolina.currentTime = 0;
+        inDaClub.pause();
+        gasolina.play();
+      }
     }
   }
 };
@@ -292,9 +330,11 @@ function checkGameOver() {
     enemyController.collideWith(player)
   ) {
     isGameOver = true;
+    oldTownRoad.pause();
     gasolina.pause();
     vocalFunction.pause();
     inDaClub.pause();
+    runIt.pause();
     playerDeathSound.play();
   }
   if (enemyController.enemyRows.length > 0) {
@@ -308,14 +348,26 @@ function checkGameOver() {
   if (enemyController.enemyRows.length === 0) {
     if (current_level === 1) {
       current_level = 2;
-      gasolina.pause();
-      vocalFunction.play();
+      if (shipNum === 4) {
+        oldTownRoad.pause();
+        runIt.play();
+      } else {
+        gasolina.pause();
+        vocalFunction.currentTime = 0;
+        vocalFunction.play();
+      }
       levelUp();
       return;
     } else if (current_level === 2) {
       current_level = 3;
-      vocalFunction.pause();
-      inDaClub.play();
+      if (shipNum === 4) {
+        runIt.pause();
+        byeByeBye.play();
+      } else {
+        vocalFunction.pause();
+        inDaClub.currentTime = 0;
+        inDaClub.play();
+      }
       levelUp();
       return;
     } else if (current_level === 3) {
