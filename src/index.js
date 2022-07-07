@@ -32,9 +32,9 @@
 // - when hit new level, everything resets, including ship position
 // - only one life
 
-import EnemyController from "/src/enemyController.js";
-import Player from "/src/player.js";
-import BulletController from "/src/bulletController.js";
+import EnemyController from "Alien-Invaders-3/src/enemyController.js";
+import Player from "Alien-Invaders-3/src/player.js";
+import BulletController from "Alien-Invaders-3/src/bulletController.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
