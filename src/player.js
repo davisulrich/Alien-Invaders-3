@@ -16,7 +16,7 @@ export default class Player {
     this.y = this.canvas.height - this.height - 40;
 
     this.image = new Image();
-    this.image.src = `/src/images/pixel_ship_${this.shipNum}.png`;
+    this.image.src = `/Alien-Invaders-3/src/images/pixel_ship_${this.shipNum}.png`;
 
     document.addEventListener("keydown", this.keyDown);
     document.addEventListener("keyup", this.keyUp);
