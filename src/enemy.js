@@ -10,11 +10,11 @@ export default class Enemy {
     this.showExplosionTimer = this.showExplosionTimerDefault;
 
     this.image = new Image();
-    this.image.src = `/src/images/pixel_enemy_${imageNumber * this.level}.png`;
+    this.image.src = `/Alien-Invaders-3/src/images/pixel_enemy_${imageNumber * this.level}.png`;
 
     this.isDead = false;
     this.explosionImage = new Image();
-    this.explosionImage.src = "/src/images/pixel_enemy_death.png";
+    this.explosionImage.src = "/Alien-Invaders-3/src/images/pixel_enemy_death.png";
   }
 
   draw(ctx) {
