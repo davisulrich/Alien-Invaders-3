@@ -34,7 +34,7 @@ export default class EnemyController {
     this.playerBulletController = playerBulletController;
     this.level = level;
     this.createEnemies();
-    this.enemyDeathSound = new Audio("/src/audio/enemy_death.ogg");
+    this.enemyDeathSound = new Audio("/Alien-Invaders-3/src/audio/enemy_death.ogg");
     this.enemyDeathSound.volume = 0.07;
   }
 
