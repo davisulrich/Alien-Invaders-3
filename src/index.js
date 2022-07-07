@@ -55,6 +55,9 @@ canvas.width = 600;
 canvas.height = 625;
 
 const background = new Image();
+background.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+};
 background.src = "/Alien-Invaders-3/src/images/pixel_stars.jpg";
 
 const ship1 = new Image();
