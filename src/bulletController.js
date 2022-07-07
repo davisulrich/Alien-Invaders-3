@@ -1,4 +1,4 @@
-import Bullet from "/src/bullet.js";
+import Bullet from "/Alien-Invaders-3/src/bullet.js";
 
 export default class BulletController {
   bullets = [];
