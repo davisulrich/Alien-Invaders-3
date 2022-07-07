@@ -55,48 +55,48 @@ canvas.width = 600;
 canvas.height = 625;
 
 const background = new Image();
-background.src = "/src/images/pixel_stars.jpg";
+background.src = "/Alien-Invaders-3/src/images/pixel_stars.jpg";
 
 const ship1 = new Image();
-ship1.src = "/src/images/pixel_ship_1.png";
+ship1.src = "/Alien-Invaders-3/src/images/pixel_ship_1.png";
 const ship2 = new Image();
-ship2.src = "/src/images/pixel_ship_2.png";
+ship2.src = "/Alien-Invaders-3/src/images/pixel_ship_2.png";
 const ship3 = new Image();
-ship3.src = "/src/images/pixel_ship_3.png";
+ship3.src = "/Alien-Invaders-3/src/images/pixel_ship_3.png";
 const ship4 = new Image();
-ship4.src = "/src/images/pixel_ship_4.png";
+ship4.src = "/Alien-Invaders-3/src/images/pixel_ship_4.png";
 
-const gameStartAudio = new Audio("src/audio/computerNoise_000.ogg");
+const gameStartAudio = new Audio("/Alien-Invaders-3/src/audio/computerNoise_000.ogg");
 gameStartAudio.volume = 0.022;
-const levelUpSound = new Audio("/src/audio/level-up.wav");
+const levelUpSound = new Audio("/Alien-Invaders-3/src/audio/level-up.wav");
 levelUpSound.volume = 0.35;
-const playerWinSound = new Audio("/src/audio/small-win.wav");
+const playerWinSound = new Audio("/Alien-Invaders-3/src/audio/small-win.wav");
 playerWinSound.volume = 0.25;
-const playerDeathSound = new Audio("/src/audio/fast-game-over.wav");
+const playerDeathSound = new Audio("/Alien-Invaders-3/src/audio/fast-game-over.wav");
 playerDeathSound.volume = 0.15;
 
-const gasolina = new Audio("src/audio/Gasolina.mp3");
+const gasolina = new Audio("/Alien-Invaders-3/src/audio/Gasolina.mp3");
 gasolina.volume = 0.45;
-const vocalFunction = new Audio("src/audio/VocalFunction.mp3");
+const vocalFunction = new Audio("/Alien-Invaders-3/src/audio/VocalFunction.mp3");
 vocalFunction.volume = 0.45;
-const inDaClub = new Audio("src/audio/InDaClub.mp3");
+const inDaClub = new Audio("/Alien-Invaders-3/src/audio/InDaClub.mp3");
 inDaClub.volume = 0.45;
-const runIt = new Audio("src/audio/runIt.mp3");
+const runIt = new Audio("/Alien-Invaders-3/src/audio/runIt.mp3");
 runIt.volume = 0.45;
-const byeByeBye = new Audio("src/audio/byeByeBye.mp3");
+const byeByeBye = new Audio("/Alien-Invaders-3/src/audio/byeByeBye.mp3");
 byeByeBye.volume = 0.45;
-const pony = new Audio("src/audio/pony.mp3");
+const pony = new Audio("/Alien-Invaders-3/src/audio/pony.mp3");
 pony.volume = 0.45;
-const oldTownRoad = new Audio("src/audio/oldTownRoad.mp3");
+const oldTownRoad = new Audio("/Alien-Invaders-3/src/audio/oldTownRoad.mp3");
 oldTownRoad.volume = 0.45;
 
 let levelUpTextTimer = 40;
 const level1Image = new Image();
-level1Image.src = "/src/images/level_1.png";
+level1Image.src = "/Alien-Invaders-3/src/images/level_1.png";
 const level2Image = new Image();
-level2Image.src = "/src/images/level_2.png";
+level2Image.src = "/Alien-Invaders-3/src/images/level_2.png";
 const level3Image = new Image();
-level3Image.src = "/src/images/level_3.png";
+level3Image.src = "/Alien-Invaders-3/src/images/level_3.png";
 
 // event listener arrow function
 let startGame = (event) => {
