@@ -11,7 +11,7 @@ export default class BulletController {
     this.level = level;
     this.shipNum = shipNum;
 
-    this.shootSound = new Audio("/src/audio/" + bulletType + "_laser.ogg");
+    this.shootSound = new Audio("/Alien-Invaders-3/src/audio/" + bulletType + "_laser.ogg");
     if (this.bulletType === "player") this.shootSound.volume = 0.1;
     else this.shootSound.volume = 0.01;
 
