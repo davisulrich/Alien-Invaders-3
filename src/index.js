@@ -154,7 +154,6 @@ let startGame = (event) => {
       gameStartAudio.play();
       if (shipNum === 4) {
         oldTownRoad.currentTime = 0;
-        byeByeBye.pause();
         oldTownRoad.play();
       } else {
         gasolina.currentTime = 0;
@@ -334,7 +333,6 @@ function checkGameOver() {
     gasolina.pause();
     vocalFunction.pause();
     inDaClub.pause();
-    runIt.pause();
     playerDeathSound.play();
   }
   if (enemyController.enemyRows.length > 0) {
@@ -348,10 +346,7 @@ function checkGameOver() {
   if (enemyController.enemyRows.length === 0) {
     if (current_level === 1) {
       current_level = 2;
-      if (shipNum === 4) {
-        oldTownRoad.pause();
-        runIt.play();
-      } else {
+      if (shipNum !== 4) {
         gasolina.pause();
         vocalFunction.currentTime = 0;
         vocalFunction.play();
@@ -360,10 +355,7 @@ function checkGameOver() {
       return;
     } else if (current_level === 2) {
       current_level = 3;
-      if (shipNum === 4) {
-        runIt.pause();
-        byeByeBye.play();
-      } else {
+      if (shipNum !== 4) {
         vocalFunction.pause();
         inDaClub.currentTime = 0;
         inDaClub.play();
