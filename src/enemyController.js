@@ -1,5 +1,5 @@
-import Enemy from "/src/enemy.js";
-import movingDirection from "/src/movingDirection.js";
+import Enemy from "/Alien-Invaders-3/src/enemy.js";
+import movingDirection from "/Alien-Invaders-3/src/movingDirection.js";
 
 export default class EnemyController {
   enemyMap = [
