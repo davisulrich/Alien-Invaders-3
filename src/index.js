@@ -62,23 +62,20 @@ background.src = "/Alien-Invaders-3/src/images/pixel_stars.jpg";
 
 const ship1 = new Image();
 ship1.onload = function() {
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(ship1, 95, canvas.height - 157, 75, 75);
 }
 ship1.src = "/Alien-Invaders-3/src/images/pixel_ship_1.png";
 const ship2 = new Image();
 ship2.onload = function() {
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(ship2, 265, canvas.height - 160, 75, 75);
 }
 ship2.src = "/Alien-Invaders-3/src/images/pixel_ship_2.png";
 const ship3 = new Image();
 ship3.onload = function() {
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(ship3, 430, canvas.height - 160, 75, 75);
 }
 ship3.src = "/Alien-Invaders-3/src/images/pixel_ship_3.png";
 const ship4 = new Image();
-ship4.onload = function() {
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-}
 ship4.src = "/Alien-Invaders-3/src/images/pixel_ship_4.png";
 
 const gameStartAudio = new Audio("/Alien-Invaders-3/src/audio/computerNoise_000.ogg");
@@ -295,9 +292,9 @@ function levelUp() {
 
 function showStartScreen(ctx) {
 //   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-  ctx.drawImage(ship1, 95, canvas.height - 157, 75, 75);
-  ctx.drawImage(ship2, 265, canvas.height - 160, 75, 75);
-  ctx.drawImage(ship3, 430, canvas.height - 160, 75, 75);
+//   ctx.drawImage(ship1, 95, canvas.height - 157, 75, 75);
+//   ctx.drawImage(ship2, 265, canvas.height - 160, 75, 75);
+//   ctx.drawImage(ship3, 430, canvas.height - 160, 75, 75);
 
   const text1 = "Welcome to";
   ctx.fillStyle = "white";
