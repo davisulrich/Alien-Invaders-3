@@ -61,12 +61,24 @@ background.onload = function() {
 background.src = "/Alien-Invaders-3/src/images/pixel_stars.jpg";
 
 const ship1 = new Image();
+ship1.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
 ship1.src = "/Alien-Invaders-3/src/images/pixel_ship_1.png";
 const ship2 = new Image();
+ship2.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
 ship2.src = "/Alien-Invaders-3/src/images/pixel_ship_2.png";
 const ship3 = new Image();
+ship3.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
 ship3.src = "/Alien-Invaders-3/src/images/pixel_ship_3.png";
 const ship4 = new Image();
+ship4.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
 ship4.src = "/Alien-Invaders-3/src/images/pixel_ship_4.png";
 
 const gameStartAudio = new Audio("/Alien-Invaders-3/src/audio/computerNoise_000.ogg");
