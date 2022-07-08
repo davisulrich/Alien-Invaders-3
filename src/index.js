@@ -55,6 +55,9 @@ canvas.width = 600;
 canvas.height = 625;
 
 const background = new Image();
+background.onload = function() {
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
 background.src = "/Alien-Invaders-3/src/images/pixel_stars.jpg";
 
 const ship1 = new Image();
@@ -279,7 +282,7 @@ function levelUp() {
 }
 
 function showStartScreen(ctx) {
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+//   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(ship1, 95, canvas.height - 157, 75, 75);
   ctx.drawImage(ship2, 265, canvas.height - 160, 75, 75);
   ctx.drawImage(ship3, 430, canvas.height - 160, 75, 75);
